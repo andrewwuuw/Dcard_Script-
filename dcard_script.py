@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 import json
 
 doc = open('test.txt', 'w', encoding='UTF-8')
-session = requests.Session()
+p = requests.Session()
 url = requests.get('https://www.dcard.tw/f/pet')
 soup = BeautifulSoup(url.text, 'html.parser')
 
@@ -19,11 +19,10 @@ for k in range(0,10):
             "limit":"30",
             "popular":"true"
         }
-        r = session.get("https://www.dcard.tw/_api/forums/pet/posts",params=post_data, headers = { "Referer": "https://www.dcard.tw/", "User-Agent": "Mozilla/5.0" })
+        r = p.get("https://www.dcard.tw/_api/forums/pet/posts",params=post_data, headers = { "Referer": "https://www.dcard.tw/", "User-Agent": "Mozilla/5.0" })
         data2 = json.loads(r.text)
-        print(data2)
         for u in range(len(data2)):
-            Temporary_url = "/f/pet/session/"+ str(data2[u]["id"]) + "-" + str(data2[u]["title"].replace(" ","-"))
+            Temporary_url = "/f/pet/p/"+ str(data2[u]["id"]) + "-" + str(data2[u]["title"].replace(" ","-"))
             a.append(Temporary_url)
 j=0 
 q=0
